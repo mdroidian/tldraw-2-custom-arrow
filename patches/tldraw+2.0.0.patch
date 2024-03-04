@@ -1,0 +1,13 @@
+diff --git a/node_modules/tldraw/dist-esm/index.d.mts b/node_modules/tldraw/dist-esm/index.d.mts
+index 581c372..9e76750 100644
+--- a/node_modules/tldraw/dist-esm/index.d.mts
++++ b/node_modules/tldraw/dist-esm/index.d.mts
+@@ -174,7 +174,7 @@ export declare class ArrowShapeTool extends StateNode {
+ 
+ /** @public */
+ export declare class ArrowShapeUtil extends ShapeUtil<TLArrowShape> {
+-    static type: "arrow";
++    static type: string;
+     static props: {
+         labelColor: EnumStyleProp<"black" | "blue" | "green" | "grey" | "light-blue" | "light-green" | "light-red" | "light-violet" | "orange" | "red" | "violet" | "yellow">;
+         color: EnumStyleProp<"black" | "blue" | "green" | "grey" | "light-blue" | "light-green" | "light-red" | "light-violet" | "orange" | "red" | "violet" | "yellow">;

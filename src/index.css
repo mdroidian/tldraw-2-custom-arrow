@@ -1,0 +1,18 @@
+.buttons {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 10;
+}
+
+.tldraw__editor {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: none;
+  z-index: 1;
+}
