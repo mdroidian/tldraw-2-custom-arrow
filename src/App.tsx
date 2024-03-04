@@ -9,9 +9,10 @@ import {
 import { CustomArrowUtil, CustomArrowTool } from "./CustomArrowUtil";
 import { CustomBoxTool, CustomBoxUtil } from "./CustomBoxUtil";
 import "@tldraw/tldraw/tldraw.css";
+import { CustomArrowTool2, CustomArrowUtil2 } from "./CustomArrowUtil2";
 
-const customShapeUtils = [CustomArrowUtil, CustomBoxUtil];
-const customTools = [CustomArrowTool, CustomBoxTool];
+const customShapeUtils = [CustomArrowUtil, CustomBoxUtil, CustomArrowUtil2];
+const customTools = [CustomArrowTool, CustomBoxTool, CustomArrowTool2];
 
 const uiOverrides: TLUiOverrides = {
   tools(app, tools) {
@@ -24,6 +25,17 @@ const uiOverrides: TLUiOverrides = {
       onSelect: () => {
         app.setCurrentTool("supports");
         console.log(app.root.getPath()); // root.supports.idle
+      },
+    };
+    tools.opposes = {
+      id: "opposes",
+      icon: "tool-arrow",
+      label: "opposes",
+      kbd: "",
+      readonlyOk: true,
+      onSelect: () => {
+        app.setCurrentTool("opposes");
+        console.log(app.root.getPath());
       },
     };
     tools.claim = {
@@ -42,6 +54,7 @@ const uiOverrides: TLUiOverrides = {
   toolbar(_, toolbar, { tools }) {
     toolbar.splice(0, 0, toolbarItem(tools.supports));
     toolbar.splice(0, 0, toolbarItem(tools.claim));
+    toolbar.splice(0, 0, toolbarItem(tools.opposes));
     return toolbar;
   },
 };
@@ -107,6 +120,58 @@ const Buttons = () => {
         }}
       >
         Create CustomArrow
+      </button>
+      <button
+        style={{ pointerEvents: "all" }}
+        onPointerDown={(e) => e.stopPropagation()}
+        onClick={() => {
+          const id1 = createShapeId();
+          const id2 = createShapeId();
+          editor.createShapes([
+            {
+              id: id1,
+              type: "claim",
+              x: 100,
+              y: 100,
+            },
+            {
+              id: id2,
+              type: "claim",
+              x: 500,
+              y: 500,
+            },
+            {
+              type: "opposes",
+              props: {
+                start: {
+                  type: "binding",
+                  boundShapeId: id1,
+                  normalizedAnchor: { x: 0.5, y: 0.5 },
+                  isExact: false,
+                  isPrecise: false,
+                },
+                end: {
+                  type: "binding",
+                  boundShapeId: id2,
+                  normalizedAnchor: { x: 0.5, y: 0.5 },
+                  isExact: false,
+                  isPrecise: false,
+                },
+              },
+            },
+          ]);
+        }}
+      >
+        Create CustomArrow2
+      </button>
+      <button
+        style={{ pointerEvents: "all" }}
+        onPointerDown={(e) => e.stopPropagation()}
+        onClick={() => {
+          console.log(editor.getSelectedShapes());
+        }}
+      >
+        getSelectedShapes()
       </button>
     </div>
   );
